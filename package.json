@@ -1,0 +1,19 @@
+{
+  "name": "fanci",
+  "version": "0.0.1",
+  "description": "Transforms JSON to a given template structure",
+  "main": "lib/fanci.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/metaodi/fanci.git"
+  },
+  "author": "Stefan Oderbolz & Philipp Küng, Liip AG",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/metaodi/fanci/issues"
+  },
+  "homepage": "https://github.com/metaodi/fanci",
+  "dependencies": {
+    "underscore": "~1.6.0"
+  }
+}
