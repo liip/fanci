@@ -66,7 +66,7 @@ var target = fanci.transform(origial, template));
         },
         "4567": {
             "id": 4567,
-            "name": El Coffee"
+            "name": "El Coffee"
         }
     }
 }
