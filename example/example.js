@@ -11,7 +11,7 @@ var product_template = {
         }
     }
 }
-console.log(fanci.transform(source, product_template));
+console.log(fanci.extract(source, product_template));
 
 // If the JSON contains an array, the rules of one level are applied to all elements of the array
 var doc_template = {
@@ -19,4 +19,4 @@ var doc_template = {
         'description': true
     }
 }
-console.log(fanci.transform(source, doc_template));
+console.log(fanci.extract(source, doc_template));

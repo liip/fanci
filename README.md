@@ -1,7 +1,7 @@
 fanci
 =====
 
-Fanci is a lightweight node module to minimize a JSON to only a subset of its fields.
+Fanci is a lightweight node module to extract a subset of a JSON based on a template.
 
 The initial goal was to consume a large JSON from an external API, and transform this in a smaller JSON with only the relevant fields.
 Unfortunately the available solutions did not really solve this problem (e.g. json-path, jsont, JSONStream, ...), at least not up to this level that we needed.
