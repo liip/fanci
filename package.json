@@ -1,7 +1,7 @@
 {
   "name": "fanci",
-  "version": "0.0.1",
-  "description": "Transforms JSON to a given template structure",
+  "version": "0.0.2",
+  "description": "Minimize JSON to a given template structure",
   "main": "lib/fanci.js",
   "repository": {
     "type": "git",
