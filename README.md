@@ -73,3 +73,11 @@ var target = fanci.transform(origial, template));
 ```
 
 You can find more examples in the example directory.
+
+## Tests
+
+To run the tests simply use the following command:
+
+```bash
+npm test
+```
