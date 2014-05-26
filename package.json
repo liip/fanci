@@ -1,18 +1,18 @@
 {
   "name": "fanci",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Extract a JSON based on a template structure",
   "main": "lib/fanci.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/metaodi/fanci.git"
+    "url": "git@github.com:liip/fanci.git"
   },
   "author": "Stefan Oderbolz & Philipp Küng, Liip AG",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/metaodi/fanci/issues"
+    "url": "https://github.com/liip/fanci/issues"
   },
-  "homepage": "https://github.com/metaodi/fanci",
+  "homepage": "https://github.com/liip/fanci",
   "dependencies": {
     "underscore": "~1.6.0"
   },
