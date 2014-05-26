@@ -169,7 +169,9 @@ describe('Extract object subset from array', function() {
     it('should return objects with only those keys', function() {
         var template = {
             'docs': {
-                'author': true
+                '*': {
+                    'author': true
+                }
             }
         };
         expect(fanci.extract(source, template)).to.be.deep.equal({
@@ -185,6 +187,31 @@ describe('Extract object subset from array', function() {
                 },
                 {
                     "author": "Odi"
+                }
+            ]
+        });
+    });
+});
+
+describe('Extract subset from array', function() {
+    it('should return only the specified subset of the array', function() {
+        var template = {
+            'docs': {
+                '0': {
+                    'author': true
+                },
+                '3': {
+                    'description': true
+                }
+            }
+        };
+        expect(fanci.extract(source, template)).to.be.deep.equal({
+            "docs": [
+                {
+                    "author": "Gandalf"
+                },
+                {
+                    "description": "Fanci stuff!"
                 }
             ]
         });

@@ -54,7 +54,7 @@ var template = {
         }
     }
 }
-var target = fanci.transform(origial, template));
+var target = fanci.extract(origial, template);
 ```
 
 `target` now contains the JSON with the fields from the template:
@@ -75,6 +75,66 @@ var target = fanci.transform(origial, template));
 ```
 
 You can find more examples in the example directory.
+
+### Template
+
+The given JSON is compared to the template JSON. The structure can not be changed, i.e. each level in the original has its equivalent in the template.
+If the template does not specify deeper levels, the original JSON is transfered.
+
+```javascript
+{
+    'pic': {
+        'id': true,
+        'date': true,
+        'author': { // from the 'author' object only 'name' is extracted
+            'name': true
+        }
+        'urls': true // if 'urls' is an object, the whole object is extracted
+    }
+}
+```
+
+When dealing with arrays you can specify single array positions as object keys.
+
+```javascript
+{
+    'posts': { // here only the 3rd and 8th item from the posts array are extracted
+        '2': true // the whole object is extracted
+        '7': { // only the comments field containing the first comment is extracted
+            'comments': {
+                '0': true
+            }
+        }
+    }
+}
+```
+
+### Special meaning of the `*` character
+
+The asterisk (`*`) has a special meaning in the template:
+
+1. It means to use all keys from one level, this is useful when your JSON contains arbitrary keys
+
+    ```javascript
+    {
+        'products': {
+            '*': { // all keys below products are taken, but only with the 'name' key
+                'name': true
+            }
+        }
+    }
+    ```
+2. For arrays the asterisk represents all array elements
+
+    ```javascript
+    {
+        'docs': {
+            '*': { // if docs is an array, '*' ensures that all elements are extracted
+                'author': true
+            }
+        }
+    }
+    ```
 
 ## Tests
 
