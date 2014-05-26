@@ -54,7 +54,7 @@ var template = {
         }
     }
 }
-var target = fanci.transform(origial, template));
+var target = fanci.extract(origial, template);
 ```
 
 `target` now contains the JSON with the fields from the template:
