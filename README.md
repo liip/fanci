@@ -57,7 +57,12 @@ var template = {
 var target = fanci.transform(origial, template));
 ```
 
-`target` now contains the JSON with the fields from the template:
+`target` now contains the JSON with the fields from the template.
+
+Note the special meaning of the `*` character:
+
+1. It means to use all keys from one level (here all keys below "products"), this is useful when your JSON contains arbitrary keys
+2. For arrays the asterisk represents all array elements, alternatively you could specify certain array indices as object keys
 
 ```javascript
 {

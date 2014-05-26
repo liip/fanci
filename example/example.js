@@ -11,12 +11,27 @@ var product_template = {
         }
     }
 }
-console.log(fanci.extract(source, product_template));
+console.log("All products with id, name and status", fanci.extract(source, product_template));
 
-// If the JSON contains an array, the rules of one level are applied to all elements of the array
+// If the JSON contains an array, use '*' so all the rules of are applied to all elements of the array
 var doc_template = {
     'docs': {
-        'description': true
+        '*': {
+            'description': true
+        }
     }
 }
-console.log(fanci.extract(source, doc_template));
+console.log("Extract only one key from an array", fanci.extract(source, doc_template));
+
+// Alternatively you can specify certain array indices to extract only a subset
+var doc_template = {
+    'docs': {
+        '1': {
+            'description': true
+        },
+        '3': {
+            'author': true
+        }
+    }
+}
+console.log("Specify which array elements should be extracted", fanci.extract(source, doc_template));
