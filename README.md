@@ -5,8 +5,10 @@ fanci
 
 Fanci is a lightweight node module to extract a subset of a JSON based on a template.
 
-The initial goal was to consume a large JSON from an external API, and transform this in a smaller JSON with only the relevant fields.
-Unfortunately the available solutions did not really solve this problem (e.g. json-path, jsont, JSONStream, ...), at least not up to this level that we needed.
+The initial goal was to consume a large JSON from an external API, and extract a smaller JSON with only the relevant fields.
+Unfortunately the available solutions did not really solve this problem (e.g.  [json-path][json-path], [jsont][jsont], [json2json][json2json], [JSONStream][jsonstream], ...), at least not up to this level that we needed.
+
+Note that this library does not _change_ the JSON structure, it can be used to extract a subset of the keys or array elements.
 
 ## Usage
 
@@ -83,3 +85,8 @@ To run the tests simply use the following command:
 ```bash
 npm test
 ```
+
+[json-path]: https://github.com/flitbit/json-path
+[jsont]: https://github.com/CamShaft/jsont
+[json2json]: https://github.com/joelvh/json2json
+[jsonstream]: https://github.com/dominictarr/JSONStream
