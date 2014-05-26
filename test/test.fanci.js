@@ -200,7 +200,7 @@ describe('Extract subset from array', function() {
                 '0': {
                     'author': true
                 },
-                '1': {
+                '3': {
                     'description': true
                 }
             }
@@ -211,7 +211,7 @@ describe('Extract subset from array', function() {
                     "author": "Gandalf"
                 },
                 {
-                    "description": "Rainbow Unicorns!"
+                    "description": "Fanci stuff!"
                 }
             ]
         });
