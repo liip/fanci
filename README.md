@@ -3,6 +3,8 @@ fanci
 
 [![Build Status](https://travis-ci.org/metaodi/fanci.svg?branch=master)](https://travis-ci.org/metaodi/fanci)
 
+[![NPM](https://nodei.co/npm/fanci.png)](https://nodei.co/npm/fanci/)
+
 Fanci is a lightweight node module to extract a subset of a JSON based on a template.
 
 The initial goal was to consume a large JSON from an external API, and extract a smaller JSON with only the relevant fields.
