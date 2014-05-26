@@ -1,7 +1,7 @@
 fanci
 =====
 
-[![Build Status](https://travis-ci.org/metaodi/fanci.svg?branch=master)](https://travis-ci.org/metaodi/fanci)
+[![Build Status](https://travis-ci.org/liip/fanci.svg?branch=master)](https://travis-ci.org/liip/fanci)
 
 [![NPM](https://nodei.co/npm/fanci.png)](https://nodei.co/npm/fanci/)
 
