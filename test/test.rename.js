@@ -298,3 +298,38 @@ describe('Rename multiple child keys of object in array without asterisk', funct
         ]);
     });
 });
+
+describe('Rename only subset from array', function() {
+    it('should return the object with only the subset of the array with replaced keys', function() {
+        var template = {
+            '0': {
+                'author': 'writer'
+            },
+            '3': {
+                'description': 'desc'
+            }
+        };
+        expect(fanci.rename(source.docs, template)).to.be.deep.equal([
+            {
+                "writer": "Gandalf",
+                "date": "2014-02-03",
+                "description": "Put some magic in here"
+            },
+            {
+                "author": "Harry",
+                "date": "2014-02-04",
+                "description": "Rainbow Unicorns!"
+            },
+            {
+                "author": "Phil",
+                "date": "2014-05-19",
+                "description": "Valuable information"
+            },
+            {
+                "author": "Odi",
+                "date": "2014-05-22",
+                "desc": "Fanci stuff!"
+            }
+        ]);
+    });
+});
