@@ -2,6 +2,11 @@
 All notable changes to this project will be documented in this file.
 This project follows [Semantic Versioning](http://semver.org/).
 
+## 0.3.0 - 2014-12-13
+### Added
+- New functionality to rename object keys based on a template
+- Introduced a change log
+
 ## 0.2.1 - 2014-05-26
 ### Added
 - License information in the LICENSE.md file
