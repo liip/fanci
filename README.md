@@ -5,16 +5,18 @@ fanci
 
 [![NPM](https://nodei.co/npm/fanci.png)](https://nodei.co/npm/fanci/)
 
-Fanci is a lightweight node module to extract a subset of a JSON based on a template.
+Fanci is a lightweight node module to extract a subseti (using `extract()`) or rename keys (using `rename()`) of a JSON based on a template.
 
 The initial goal was to consume a large JSON from an external API, and extract a smaller JSON with only the relevant fields.
 Unfortunately the available solutions did not really solve this problem (e.g.  [json-path][json-path], [jsont][jsont], [json2json][json2json], [JSONStream][jsonstream], ...), at least not up to this level that we needed.
 
-Note that this library does not _change_ the JSON structure, it can be used to extract a subset of the keys or array elements.
+Note that this library does not _change_ the JSON structure, it can be used to extract a subset of the keys or array elements or renaming them.
 
 ## Usage
 
-Using `fanci` is very easy. All you need is your original JSON and a template which defines the new fields:
+Using `fanci` is very easy. All you need is your original JSON and a template which defines whats to do.
+
+### `extract` keys from JSON
 
 ```javascript
 var fanci = require('fanci');
@@ -61,6 +63,8 @@ var template = {
 var target = fanci.extract(origial, template);
 ```
 
+#### Result
+
 `target` now contains the JSON with the fields from the template:
 
 ```javascript
@@ -80,7 +84,7 @@ var target = fanci.extract(origial, template);
 
 You can find more examples in the example directory.
 
-### Template
+#### Template
 
 The given JSON is compared to the template JSON. The structure can not be changed, i.e. each level in the original has its equivalent in the template.
 If the template does not specify deeper levels, the original JSON is transfered.
@@ -92,7 +96,7 @@ If the template does not specify deeper levels, the original JSON is transfered.
         'date': true,
         'author': { // from the 'author' object only 'name' is extracted
             'name': true
-        }
+        },
         'urls': true // if 'urls' is an object, the whole object is extracted
     }
 }
@@ -108,6 +112,110 @@ When dealing with arrays you can specify single array positions as object keys.
             'comments': {
                 '0': true
             }
+        }
+    }
+}
+```
+
+### `rename` keys from JSON
+
+```javascript
+var fanci = require('fanci');
+
+var original = {
+    "products": {
+        "1234": {
+            "name": "The Beef",
+            "status": {
+                "available": true
+            },
+            "delivery": {
+                "company": "My Transport",
+                "time": "daily"
+            }
+        },
+        "4567": {
+            "name": "El Coffee",
+            "status": {
+                "available": true
+            },
+            "delivery": {
+                "company": "Ayayay",
+                "time": "weekend"
+            }
+        }
+    }
+};
+
+var template = {
+    'products': ['stock', {
+        '*': {
+            'delivery': 'transport',
+            'status': {
+                'available': 'in_stock'
+            }
+        }
+    }]
+}
+var target = fanci.rename(origial, template);
+```
+
+#### Result
+
+`target` now contains the JSON with the renamed keys from the template:
+
+```javascript
+{
+    "stock": {
+        "1234": {
+            "name": "The Beef",
+            "status": {
+                "in_stock": true
+            },
+            "transport": {
+                "company": "My Transport",
+                "time": "daily"
+            }
+        },
+        "4567": {
+            "name": "El Coffee",
+            "status": {
+                "in_stock": true
+            },
+            "transport": {
+                "company": "Ayayay",
+                "time": "weekend"
+            }
+        }
+    }
+}
+```
+
+#### Template
+
+In the template for each key the new name can be given. To be able to change parent keys for objects and array, the template supports arrays to define the new names of the keys. That way arbitrary structures can processed.
+
+```javascript
+{
+    'books': {
+        'id': 'identifier', //rename key 'id' to 'identifier'
+        'author': ['writer', { rename 'author' to 'writer' AND specify further rules for the next level
+            'name': 'title' // rename the authors 'name' to 'title'
+        }]
+    }
+}
+```
+
+When dealing with arrays you can specify single array positions as object keys.
+
+```javascript
+{
+    'posts': { // here only the 3rd and 8th item from the posts array are renamed
+        '2': {
+            'name': 'fullname'
+        },
+        '7': {
+            'name': 'firstname'
         }
     }
 }
