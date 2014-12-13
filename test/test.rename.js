@@ -129,6 +129,73 @@ describe('Rename parent and child', function() {
     });
 });
 
+describe('Rename child-only', function() {
+    it('should return the object with renamed child keys', function() {
+        var obj = {
+            "products": {
+                "1234": {
+                    "name": "The Beef",
+                    "status": {
+                        "available": true
+                    },
+                    "delivery": {
+                        "company": "My Transport",
+                        "time": "daily"
+                    }
+                },
+                "4567": {
+                    "name": "El Coffee",
+                    "status": {
+                        "available": true
+                    },
+                    "delivery": {
+                        "company": "Ayayay",
+                        "time": "weekend"
+                    }
+                }
+            }
+        };
+
+        var template = {
+            'products': ['stock', {
+                '*': {
+                    'delivery': 'transport',
+                    'status': {
+                        'available': 'in_stock'
+                    }
+                }
+            }]
+        }
+        var result = fanci.rename(obj, template);
+
+        expect(result).to.be.deep.equal({
+            "stock": {
+                "1234": {
+                    "name": "The Beef",
+                    "status": {
+                        "in_stock": true
+                    },
+                    "transport": {
+                        "company": "My Transport",
+                        "time": "daily"
+                    }
+                },
+                "4567": {
+                    "name": "El Coffee",
+                    "status": {
+                        "in_stock": true
+                    },
+                    "transport": {
+                        "company": "Ayayay",
+                        "time": "weekend"
+                    }
+                }
+            }
+        });
+    });
+});
+
+
 describe('Rename child key of object', function() {
     it('should return the whole object with the renamed key', function() {
         var template = {
