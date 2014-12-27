@@ -50,7 +50,7 @@ describe('Rename with non-matching template', function() {
 
 describe('Rename with empty source', function() {
     it('should return an empty object', function() {
-        var obj = {}
+        var obj = {};
         var template = {
             'lang': 'language'
         };
@@ -165,7 +165,7 @@ describe('Rename child-only', function() {
                     }
                 }
             }]
-        }
+        };
         var result = fanci.rename(obj, template);
 
         expect(result).to.be.deep.equal({
