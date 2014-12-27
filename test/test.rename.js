@@ -12,7 +12,7 @@ describe('Rename root keys of object', function() {
         };
         var result = fanci.rename(source, template);
 
-        expect(Object.keys(result)).to.be.deep.equal(['stock', 'library']);
+        expect(Object.keys(result)).to.be.deep.equal([ 'stock', 'library' ]);
     });
 });
 
@@ -22,7 +22,7 @@ describe('Rename with empty template', function() {
             'test': {
                 'hallo': 'velo'
             },
-            'langs': ['PHP', 'JavaScript', 'Sass']
+            'langs': [ 'PHP', 'JavaScript', 'Sass' ]
         };
         var template = {};
         var result = fanci.rename(obj, template);
@@ -37,7 +37,7 @@ describe('Rename with non-matching template', function() {
             'test': {
                 'hallo': 'velo'
             },
-            'langs': ['PHP', 'JavaScript', 'Sass']
+            'langs': [ 'PHP', 'JavaScript', 'Sass' ]
         };
         var template = {
             'lang': 'language'
@@ -68,13 +68,13 @@ describe('Rename parent-only', function() {
                     'velo': 'foobar'
                 }
             },
-            'langs': ['PHP', 'JavaScript', 'Sass']
+            'langs': [ 'PHP', 'JavaScript', 'Sass' ]
         };
         var template1 = {
             'test': 'velo'
         };
         var template2 = {
-            'test': ['velo']
+            'test': [ 'velo' ]
         };
 
         var result1 = fanci.rename(obj, template1);
@@ -84,7 +84,7 @@ describe('Rename parent-only', function() {
                     'velo': 'foobar'
                 }
             },
-            'langs': ['PHP', 'JavaScript', 'Sass']
+            'langs': [ 'PHP', 'JavaScript', 'Sass' ]
         });
 
         var result2 = fanci.rename(obj, template2);
@@ -94,7 +94,7 @@ describe('Rename parent-only', function() {
                     'velo': 'foobar'
                 }
             },
-            'langs': ['PHP', 'JavaScript', 'Sass']
+            'langs': [ 'PHP', 'JavaScript', 'Sass' ]
         });
     });
 });
@@ -107,14 +107,20 @@ describe('Rename parent and child', function() {
                     'velo': 'foobar'
                 }
             },
-            'langs': ['PHP', 'JavaScript', 'Sass']
+            'langs': [ 'PHP', 'JavaScript', 'Sass' ]
         };
         var template = {
-            'test': ['velo', {
-                'hallo': ['hello', {
-                    'velo': 'blubb'
-                }]
-            }]
+            'test': [
+                'velo',
+                {
+                    'hallo': [
+                        'hello',
+                        {
+                            'velo': 'blubb'
+                        }
+                    ]
+                }
+            ]
         };
         var result = fanci.rename(obj, template);
 
@@ -124,7 +130,7 @@ describe('Rename parent and child', function() {
                     'blubb': 'foobar'
                 }
             },
-            'langs': ['PHP', 'JavaScript', 'Sass']
+            'langs': [ 'PHP', 'JavaScript', 'Sass' ]
         });
     });
 });
@@ -157,14 +163,17 @@ describe('Rename child-only', function() {
         };
 
         var template = {
-            'products': ['stock', {
-                '*': {
-                    'delivery': 'transport',
-                    'status': {
-                        'available': 'in_stock'
+            'products': [
+                'stock',
+                {
+                    '*': {
+                        'delivery': 'transport',
+                        'status': {
+                            'available': 'in_stock'
+                        }
                     }
                 }
-            }]
+            ]
         };
         var result = fanci.rename(obj, template);
 
@@ -194,7 +203,6 @@ describe('Rename child-only', function() {
         });
     });
 });
-
 
 describe('Rename child key of object', function() {
     it('should return the whole object with the renamed key', function() {
@@ -254,7 +262,7 @@ describe('Rename multiple child keys of object', function() {
             '*': {
                 'id': 'identifier',
                 'delivery': 'transport',
-                'status': ['quo', { 'available': 'vadis' }]
+                'status': [ 'quo', { 'available': 'vadis' } ]
             }
         };
         var result = fanci.rename(source.products, template);
@@ -306,7 +314,7 @@ describe('Rename multiple child keys of object in array', function() {
     it('should return the whole array with objects with renamed keys', function() {
         var template = {
             '*': {
-                'author': 'writer',
+                'author': 'writer'
             }
         };
         var result = fanci.rename(source.docs, template);
@@ -338,7 +346,7 @@ describe('Rename multiple child keys of object in array', function() {
 describe('Rename multiple child keys of object in array without asterisk', function() {
     it('should return the whole array with objects with renamed keys', function() {
         var template = {
-            'author': 'writer',
+            'author': 'writer'
         };
         var result = fanci.rename(source.docs, template);
         expect(result).to.be.deep.equal([
