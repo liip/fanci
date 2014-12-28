@@ -148,11 +148,11 @@ var original = {
 };
 
 var template = {
-    'products': ['stock', {
+    'stock': ['products', {
         '*': {
-            'delivery': 'transport',
+            'transport': 'delivery',
             'status': {
-                'available': 'in_stock'
+                'in_stock': 'available'
             }
         }
     }]
@@ -193,14 +193,14 @@ var target = fanci.rename(origial, template);
 
 #### Template
 
-In the template for each key the new name can be given. To be able to change parent keys for objects and array, the template supports arrays to define the new names of the keys. That way arbitrary structures can processed.
+In the template the new names are defined. For each new name, the old key has to be given as its value. To be able to change parent keys for objects and array, the template supports arrays to define the new names of the keys. That way arbitrary structures can processed.
 
 ```javascript
 {
     'books': {
-        'id': 'identifier', //rename key 'id' to 'identifier'
-        'author': ['writer', { rename 'author' to 'writer' AND specify further rules for the next level
-            'name': 'title' // rename the authors 'name' to 'title'
+        'id': 'identifier', //rename key 'identifier' to 'id'
+        'writer': ['author', { //rename 'author' to 'writer' AND specify further rules for the next level
+            'name': 'title' // rename the authors 'title' property to 'name'
         }]
     }
 }
