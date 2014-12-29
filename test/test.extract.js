@@ -1,3 +1,4 @@
+/*jshint expr: true*/
 var expect = require('chai').expect;
 
 var fanci = require('../lib/fanci');
@@ -16,17 +17,6 @@ describe('Extract empty template', function() {
     it('should return an empty object', function() {
         var template = {};
         expect(fanci.extract(source, template)).to.be.empty;
-    });
-});
-
-describe('Extract empty source', function() {
-    it('should return an empty object', function() {
-        var template = {
-            'products': {
-                '*': true
-            }
-        };
-        expect(fanci.extract({}, template)).to.be.empty;
     });
 });
 
