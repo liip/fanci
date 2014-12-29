@@ -204,3 +204,84 @@ describe('Use a nested template for more complex objects', function() {
         });
     });
 });
+
+describe('Construct an array', function() {
+    it('should return the array with the corresponding values', function() {
+        var template = {
+            'names': [
+                'products.1234.name',
+                'products.4567.name',
+                'products.6789.name'
+            ]
+        };
+        var result = fanci.transform(source, template);
+
+        expect(result['names']).to.be.deep.equal(
+            [
+                'The Beef',
+                'El Coffee',
+                'Life Product'
+            ]
+        );
+    });
+});
+
+describe('Use a format function', function() {
+    it('should return the formatted object', function() {
+        var template = {
+            'upper': [
+                'products.1234.name',
+                function(value) {
+                    return value.toUpperCase();
+                }
+            ]
+        };
+        var result = fanci.transform(source, template);
+
+        expect(result).to.be.deep.equal(
+            {
+                'upper': 'THE BEEF'
+            }
+        );
+    });
+});
+
+describe('Use a more complex transformation with two format functions', function() {
+    it('should return the new transformed and formatted object', function() {
+        var obj = {
+            'Datum': '2014-03-15',
+            'Oel': 'X',
+            'Glas': '',
+            'Metall': 'X'
+        }
+        var formatFn = function(value) {
+            return (value === 'X');
+        }
+        var template = {
+            'date': [
+                'Datum',
+                function(value) {
+                    var dateObj = new Date(value);
+                    return dateObj.toISOString();
+                }
+            ],
+            'kind': {
+                'oil': [ 'Oel', formatFn ],
+                'glass': [ 'Glas', formatFn ],
+                'metal': [ 'Metall', formatFn ],
+            }
+        };
+        var result = fanci.transform(obj, template);
+
+        expect(result).to.be.deep.equal(
+            {
+                'date': '2014-03-15T00:00:00.000Z',
+                'kind': {
+                    'oil': true,
+                    'glass': false,
+                    'metal': true
+                }
+            }
+        );
+    });
+});
