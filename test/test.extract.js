@@ -31,17 +31,6 @@ describe('Extract empty source', function() {
     });
 });
 
-describe('Extract empty source', function() {
-    it('should return an empty object', function() {
-        var template = {
-            'products': {
-                '*': true
-            }
-        };
-        expect(fanci.extract({}, template)).to.be.empty;
-    });
-});
-
 describe('Extract arbitrary keys with *', function() {
     it('should return all objects', function() {
         var template = {
