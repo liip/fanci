@@ -3,6 +3,8 @@ All notable changes to this project will be documented in this file.
 This project follows [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+
+## 0.4.0 - 2014-12-30
 #### Added
 - Added transform functionality to create arbitrary objects based on a template
 - Added format function to transform, so that transformation are more flexible

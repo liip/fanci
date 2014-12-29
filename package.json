@@ -1,7 +1,7 @@
 {
   "name": "fanci",
-  "version": "0.3.0",
-  "description": "Extract or rename a JSON based on a template structure",
+  "version": "0.4.0",
+  "description": "Extract, rename or transform a JSON based on a template structure",
   "main": "lib/fanci.js",
   "repository": {
     "type": "git",
