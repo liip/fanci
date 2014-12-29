@@ -5,6 +5,7 @@ This project follows [Semantic Versioning](http://semver.org/).
 ## [Unreleased][unreleased]
 #### Added
 - Added transform functionality to create arbitrary objects based on a template
+- Added format function to transform, so that transformation are more flexible
 
 #### Changed
 - Refactoring to use the Template Method pattern

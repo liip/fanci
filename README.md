@@ -21,6 +21,7 @@ All these methods take a source object as their first parameter and a template a
 ## Usage
 
 Using `fanci` is very easy. All you need is your original JSON and a template which defines whats to do.
+You can find more examples in the example and test directory.
 
 ### `extract` keys from JSON
 
@@ -88,7 +89,6 @@ var target = fanci.extract(origial, template);
 }
 ```
 
-You can find more examples in the example directory.
 
 #### Template
 
@@ -266,6 +266,12 @@ var original = {
 var template = {
     'id': 'products.1234.internal_id,
     'company': 'products.4567.delivery.company,
+    'name': [
+        'products.6789.name',
+        function(value) {
+            return value.toUpperCase();
+        }
+    ],
     'available': 'products.*.status.available'
 }
 var target = fanci.transform(origial, template);
@@ -279,6 +285,7 @@ var target = fanci.transform(origial, template);
 {
     "id": "X04BEEF",
     "company": "Ayayay",
+    "name": "LIFE PRODUCT",
     "available": [
         true,
         true
@@ -286,19 +293,29 @@ var target = fanci.transform(origial, template);
 }
 ```
 
-You can find more examples in the example directory.
-
 #### Template
 
 The template defines the new structure of the resulting object. The values are _paths_ in the original JSON. Like that, it is possible to select nested elements and to put them in a new strucutre. By using the asteriks all elements of a level are considered. The resulting array in flattend or even removed completly if it only contains one item.
+It is possible to specify a format function to be applied to the object extracted from the path. This opens new possibilities to generate more complex structures. To do this, you have to specify an array instead of the path string, the first element is the path string, the second one is a function that takes the extracted object as an argument.
+If the second element is not a function, it is assumed that you wanted to construct an array in the resulting object.
 
 ```javascript
 {
     'pics': {
         'id': 'pics.id',
-        'date': 'pics.date',
+        'dates': [
+            'pics.1.date',
+            'pics.3.date',
+            'pics.5.date',
+        ],
         'authors': 'pics.*.author.name'
-    }
+    },
+    'date': [
+        'Date',
+        function(value) {
+            return new Date(value);
+        }
+    ]
 }
 ```
 

@@ -1,3 +1,5 @@
+/*jshint expr: true*/
+
 var expect = require('chai').expect;
 var _ = require('underscore');
 
@@ -44,18 +46,18 @@ describe('Using a * template', function() {
         var obj = {
             'foo': 'bar',
             'list': [
-                {'test': 1},
-                {'test': 2},
+                { 'test': 1 },
+                { 'test': 2 }
             ]
         };
-        var template = {'test': '*'};
+        var template = { 'test': '*' };
 
         var result = fanci.transform(obj, template);
 
         expect(result['test']).to.be.deep.equal([
             'bar',
-            {'test': 1},
-            {'test': 2}
+            { 'test': 1 },
+            { 'test': 2 }
         ]);
     });
 });
@@ -198,7 +200,7 @@ describe('Use a nested template for more complex objects', function() {
                 'level': [
                     { 'available': true },
                     { 'available': true },
-                    { 'available': false },
+                    { 'available': false }
                 ]
             }
         });
@@ -246,6 +248,32 @@ describe('Use a format function', function() {
     });
 });
 
+describe('Use a format function on an array', function() {
+    it('should return the formatted object', function() {
+        var template = {
+            'lower_names': [
+                'products.*.name',
+                function(values) {
+                    return _.map(values, function(value) {
+                        return value.toLowerCase();
+                    });
+                }
+            ]
+        };
+        var result = fanci.transform(source, template);
+
+        expect(result).to.be.deep.equal(
+            {
+                'lower_names': [
+                    'the beef',
+                    'el coffee',
+                    'life product'
+                ]
+            }
+        );
+    });
+});
+
 describe('Use a more complex transformation with two format functions', function() {
     it('should return the new transformed and formatted object', function() {
         var obj = {
@@ -253,10 +281,10 @@ describe('Use a more complex transformation with two format functions', function
             'Oel': 'X',
             'Glas': '',
             'Metall': 'X'
-        }
+        };
         var formatFn = function(value) {
             return (value === 'X');
-        }
+        };
         var template = {
             'date': [
                 'Datum',
@@ -268,7 +296,7 @@ describe('Use a more complex transformation with two format functions', function
             'kind': {
                 'oil': [ 'Oel', formatFn ],
                 'glass': [ 'Glas', formatFn ],
-                'metal': [ 'Metall', formatFn ],
+                'metal': [ 'Metall', formatFn ]
             }
         };
         var result = fanci.transform(obj, template);
