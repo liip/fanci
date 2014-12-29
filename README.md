@@ -5,12 +5,18 @@ fanci
 
 [![NPM](https://nodei.co/npm/fanci.png)](https://nodei.co/npm/fanci/)
 
-Fanci is a lightweight node module to extract a subseti (using `extract()`) or rename keys (using `rename()`) of a JSON based on a template.
+Fanci is a lightweight node module to extract a subsets (using `extract()`), rename keys (using `rename()`) or tranform the structure (using `transform()`) of a JSON based on a template.
 
 The initial goal was to consume a large JSON from an external API, and extract a smaller JSON with only the relevant fields.
 Unfortunately the available solutions did not really solve this problem (e.g.  [json-path][json-path], [jsont][jsont], [json2json][json2json], [JSONStream][jsonstream], ...), at least not up to this level that we needed.
 
-Note that this library does not _change_ the JSON structure, it can be used to extract a subset of the keys or array elements or renaming them.
+
+* `extract()` does not change the original structure of the object, it extracts a subset of its keys
+* `rename()` does not change the original structure of the object, it can rename keys. All not renamed keys remain the same.
+* `transform()` changes the structure of the object, only the defined keys will be in the resulting object
+
+All these methods take a source object as their first parameter and a template as their second. The template defines how the resulting JSON looks like. 
+
 
 ## Usage
 
@@ -221,6 +227,81 @@ When dealing with arrays you can specify single array positions as object keys.
 }
 ```
 
+### `transform` the structure of a JSON
+
+```javascript
+var fanci = require('fanci');
+
+var original = {
+    "products": {
+        "1234": {
+            "id": 1234,
+            "internal_id": "X04BEEF",
+            "name": "The Beef",
+            "status": {
+                "available": true
+            },
+            "delivery": {
+                "company": "My Transport",
+                "rate": "business_hour",
+                "time": "daily"
+            }
+        },
+        "4567": {
+            "id": 4567,
+            "internal_id": "X08CAFE",
+            "name": "El Coffee",
+            "status": {
+                "available": true
+            },
+            "delivery": {
+                "company": "Ayayay",
+                "rate": "weekend",
+                "time": "weekend"
+            }
+        }
+    }
+};
+
+var template = {
+    'id': 'products.1234.internal_id,
+    'company': 'products.4567.delivery.company,
+    'available': 'products.*.status.available'
+}
+var target = fanci.transform(origial, template);
+```
+
+#### Result
+
+`target` now contains the JSON with the fields from the template:
+
+```javascript
+{
+    "id": "X04BEEF",
+    "company": "Ayayay",
+    "available": [
+        true,
+        true
+    ]
+}
+```
+
+You can find more examples in the example directory.
+
+#### Template
+
+The template defines the new structure of the resulting object. The values are _paths_ in the original JSON. Like that, it is possible to select nested elements and to put them in a new strucutre. By using the asteriks all elements of a level are considered. The resulting array in flattend or even removed completly if it only contains one item.
+
+```javascript
+{
+    'pics': {
+        'id': 'pics.id',
+        'date': 'pics.date',
+        'authors': 'pics.*.author.name'
+    }
+}
+```
+
 ### Special meaning of the `*` character
 
 The asterisk (`*`) has a special meaning in the template:
@@ -247,6 +328,15 @@ The asterisk (`*`) has a special meaning in the template:
         }
     }
     ```
+
+3. The same applies in the "path" that is used for `transform()`
+
+    ```javascript
+    {
+        'authors': 'docs.*.author'
+    }
+    ```
+
 
 ## Tests
 
