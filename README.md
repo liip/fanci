@@ -264,8 +264,8 @@ var original = {
 };
 
 var template = {
-    'id': 'products.1234.internal_id,
-    'company': 'products.4567.delivery.company,
+    'id': 'products.1234.internal_id',
+    'company': 'products.4567.delivery.company',
     'name': [
         'products.6789.name',
         function(value) {
