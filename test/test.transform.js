@@ -313,3 +313,20 @@ describe('Use a more complex transformation with two format functions', function
         );
     });
 });
+
+describe('Return only the internal_id value', function() {
+    it('should return internal_id value match based on wildcard *ar:*', function() {
+        var template = {
+            'match_only_*ar:*': 'products.*ar:*.internal_id'
+        };
+        var result = fanci.transform(source, template);
+
+        expect(result).to.be.deep.equal({
+            'match_only_*ar:*': [
+                'char:1',
+                'char:2',
+                'bar:1'
+            ]
+        });
+    });
+});
