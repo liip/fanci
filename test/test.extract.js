@@ -1,44 +1,44 @@
 /*jshint expr: true*/
-var expect = require('chai').expect;
+var expect = require( 'chai' ).expect;
 
-var fanci = require('../lib/fanci');
-var source = require('../example/source');
+var fanci = require( '../lib/fanci' );
+var source = require( '../example/source' );
 
-describe('Extract full object', function() {
-    it('should return the whole objects as it was before', function() {
+describe( 'Extract full object', function() {
+    it( 'should return the whole objects as it was before', function() {
         var template = {
             '*': true
         };
-        expect(fanci.extract(source, template)).to.be.deep.equal(source);
-    });
-});
+        expect( fanci.extract( source, template ) ).to.be.deep.equal( source );
+    } );
+} );
 
-describe('Extract empty template', function() {
-    it('should return an empty object', function() {
+describe( 'Extract empty template', function() {
+    it( 'should return an empty object', function() {
         var template = {};
-        expect(fanci.extract(source, template)).to.be.empty;
-    });
-});
+        expect( fanci.extract( source, template ) ).to.be.empty;
+    } );
+} );
 
-describe('Extract empty source', function() {
-    it('should return an empty object', function() {
+describe( 'Extract empty source', function() {
+    it( 'should return an empty object', function() {
         var template = {
             'products': {
                 '*': true
             }
         };
-        expect(fanci.extract({}, template)).to.be.empty;
-    });
-});
+        expect( fanci.extract( {}, template ) ).to.be.empty;
+    } );
+} );
 
-describe('Extract arbitrary keys with *', function() {
-    it('should return all objects', function() {
+describe( 'Extract arbitrary keys with *', function() {
+    it( 'should return all objects', function() {
         var template = {
             'products': {
                 '*': true
             }
         };
-        expect(fanci.extract(source, template)).to.be.deep.equal({
+        expect( fanci.extract( source, template ) ).to.be.deep.equal( {
             "products": {
                 "1234": {
                     "id": 1234,
@@ -78,14 +78,26 @@ describe('Extract arbitrary keys with *', function() {
                         "rate": "business_hour",
                         "time": "weekend"
                     }
+                },
+                "char:1": {
+                    "internal_id": "char:1"
+                },
+                "char:2": {
+                    "internal_id": "char:2"
+                },
+                "bar:1": {
+                    "internal_id": "bar:1"
+                },
+                "foo:1": {
+                    "internal_id": "foo:1"
                 }
             }
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Extract only a subset of keys', function() {
-    it('should return objects with only those keys', function() {
+describe( 'Extract only a subset of keys', function() {
+    it( 'should return objects with only those keys', function() {
         var template = {
             'products': {
                 '*': {
@@ -95,7 +107,7 @@ describe('Extract only a subset of keys', function() {
                 }
             }
         };
-        expect(fanci.extract(source, template)).to.be.deep.equal({
+        expect( fanci.extract( source, template ) ).to.be.deep.equal( {
             "products": {
                 "1234": {
                     "id": 1234,
@@ -117,18 +129,22 @@ describe('Extract only a subset of keys', function() {
                     "status": {
                         "available": false
                     }
-                }
+                },
+                "char:1": {},
+                "char:2": {},
+                "bar:1": {},
+                "foo:1": {}
             }
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Extract an array of objects', function() {
-    it('should return the array of objects', function() {
+describe( 'Extract an array of objects', function() {
+    it( 'should return the array of objects', function() {
         var template = {
             'docs': true
         };
-        expect(fanci.extract(source, template)).to.be.deep.equal({
+        expect( fanci.extract( source, template ) ).to.be.deep.equal( {
             "docs": [
                 {
                     "author": "Gandalf",
@@ -151,12 +167,12 @@ describe('Extract an array of objects', function() {
                     "description": "Fanci stuff!"
                 }
             ]
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Extract object subset from array', function() {
-    it('should return objects with only those keys', function() {
+describe( 'Extract object subset from array', function() {
+    it( 'should return objects with only those keys', function() {
         var template = {
             'docs': {
                 '*': {
@@ -164,7 +180,7 @@ describe('Extract object subset from array', function() {
                 }
             }
         };
-        expect(fanci.extract(source, template)).to.be.deep.equal({
+        expect( fanci.extract( source, template ) ).to.be.deep.equal( {
             "docs": [
                 {
                     "author": "Gandalf"
@@ -179,18 +195,18 @@ describe('Extract object subset from array', function() {
                     "author": "Odi"
                 }
             ]
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Extract from array', function() {
-    it('should return an array with the extacted objects', function() {
+describe( 'Extract from array', function() {
+    it( 'should return an array with the extacted objects', function() {
         var template = {
             '*': {
                 'author': true
             }
         };
-        expect(fanci.extract(source.docs, template)).to.be.deep.equal([
+        expect( fanci.extract( source.docs, template ) ).to.be.deep.equal( [
             {
                 "author": "Gandalf"
             },
@@ -203,12 +219,12 @@ describe('Extract from array', function() {
             {
                 "author": "Odi"
             }
-        ]);
-    });
-});
+        ] );
+    } );
+} );
 
-describe('Extract subset from array', function() {
-    it('should return only the specified subset of the array', function() {
+describe( 'Extract subset from array', function() {
+    it( 'should return only the specified subset of the array', function() {
         var template = {
             'docs': {
                 '0': {
@@ -219,7 +235,7 @@ describe('Extract subset from array', function() {
                 }
             }
         };
-        expect(fanci.extract(source, template)).to.be.deep.equal({
+        expect( fanci.extract( source, template ) ).to.be.deep.equal( {
             "docs": [
                 {
                     "author": "Gandalf"
@@ -228,6 +244,6 @@ describe('Extract subset from array', function() {
                     "description": "Fanci stuff!"
                 }
             ]
-        });
-    });
-});
+        } );
+    } );
+} );

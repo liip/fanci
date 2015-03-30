@@ -1,25 +1,25 @@
 /*jshint expr: true*/
 
-var expect = require('chai').expect;
-var _ = require('underscore');
+var expect = require( 'chai' ).expect;
+var _ = require( 'underscore' );
 
-var fanci = require('../lib/fanci');
-var source = require('../example/source');
+var fanci = require( '../lib/fanci' );
+var source = require( '../example/source' );
 
-describe('Rename root keys of object', function() {
-    it('should return the whole object with new root keys', function() {
+describe( 'Rename root keys of object', function() {
+    it( 'should return the whole object with new root keys', function() {
         var template = {
             'stock': 'products',
             'library': 'docs'
         };
-        var result = fanci.rename(source, template);
+        var result = fanci.rename( source, template );
 
-        expect(Object.keys(result)).to.be.deep.equal([ 'stock', 'library' ]);
-    });
-});
+        expect( Object.keys( result ) ).to.be.deep.equal( [ 'stock', 'library' ] );
+    } );
+} );
 
-describe('Rename with empty template', function() {
-    it('should return the same object as before', function() {
+describe( 'Rename with empty template', function() {
+    it( 'should return the same object as before', function() {
         var obj = {
             'test': {
                 'hallo': 'velo'
@@ -27,14 +27,14 @@ describe('Rename with empty template', function() {
             'langs': [ 'PHP', 'JavaScript', 'Sass' ]
         };
         var template = {};
-        var result = fanci.rename(obj, template);
+        var result = fanci.rename( obj, template );
 
-        expect(result).to.be.deep.equal(obj);
-    });
-});
+        expect( result ).to.be.deep.equal( obj );
+    } );
+} );
 
-describe('Rename with non-matching template', function() {
-    it('should return the same object as before', function() {
+describe( 'Rename with non-matching template', function() {
+    it( 'should return the same object as before', function() {
         var obj = {
             'test': {
                 'hallo': 'velo'
@@ -44,26 +44,26 @@ describe('Rename with non-matching template', function() {
         var template = {
             'language': 'lang'
         };
-        var result = fanci.rename(obj, template);
+        var result = fanci.rename( obj, template );
 
-        expect(result).to.be.deep.equal(obj);
-    });
-});
+        expect( result ).to.be.deep.equal( obj );
+    } );
+} );
 
-describe('Rename with empty source', function() {
-    it('should return an empty object', function() {
+describe( 'Rename with empty source', function() {
+    it( 'should return an empty object', function() {
         var obj = {};
         var template = {
             'language': 'lang'
         };
-        var result = fanci.rename(obj, template);
+        var result = fanci.rename( obj, template );
 
-        expect(result).to.be.empty;
-    });
-});
+        expect( result ).to.be.empty;
+    } );
+} );
 
-describe('Rename parent-only', function() {
-    it('should return the object with renamed parent keys', function() {
+describe( 'Rename parent-only', function() {
+    it( 'should return the object with renamed parent keys', function() {
         var obj = {
             'test': {
                 'hallo': {
@@ -79,30 +79,30 @@ describe('Rename parent-only', function() {
             'velo': [ 'test' ]
         };
 
-        var result1 = fanci.rename(obj, template1);
-        expect(result1).to.be.deep.equal({
+        var result1 = fanci.rename( obj, template1 );
+        expect( result1 ).to.be.deep.equal( {
             'velo': {
                 'hallo': {
                     'velo': 'foobar'
                 }
             },
             'langs': [ 'PHP', 'JavaScript', 'Sass' ]
-        });
+        } );
 
-        var result2 = fanci.rename(obj, template2);
-        expect(result2).to.be.deep.equal({
+        var result2 = fanci.rename( obj, template2 );
+        expect( result2 ).to.be.deep.equal( {
             'velo': {
                 'hallo': {
                     'velo': 'foobar'
                 }
             },
             'langs': [ 'PHP', 'JavaScript', 'Sass' ]
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Rename parent and child', function() {
-    it('should return the object with renamed parent and child keys', function() {
+describe( 'Rename parent and child', function() {
+    it( 'should return the object with renamed parent and child keys', function() {
         var obj = {
             'test': {
                 'hallo': {
@@ -124,21 +124,21 @@ describe('Rename parent and child', function() {
                 }
             ]
         };
-        var result = fanci.rename(obj, template);
+        var result = fanci.rename( obj, template );
 
-        expect(result).to.be.deep.equal({
+        expect( result ).to.be.deep.equal( {
             'velo': {
                 'hello': {
                     'blubb': 'foobar'
                 }
             },
             'langs': [ 'PHP', 'JavaScript', 'Sass' ]
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Rename child-only', function() {
-    it('should return the object with renamed child keys', function() {
+describe( 'Rename child-only', function() {
+    it( 'should return the object with renamed child keys', function() {
         var obj = {
             "products": {
                 "1234": {
@@ -177,9 +177,9 @@ describe('Rename child-only', function() {
                 }
             ]
         };
-        var result = fanci.rename(obj, template);
+        var result = fanci.rename( obj, template );
 
-        expect(result).to.be.deep.equal({
+        expect( result ).to.be.deep.equal( {
             "stock": {
                 "1234": {
                     "name": "The Beef",
@@ -202,19 +202,19 @@ describe('Rename child-only', function() {
                     }
                 }
             }
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Rename child key of object', function() {
-    it('should return the whole object with the renamed key', function() {
+describe( 'Rename child key of object', function() {
+    it( 'should return the whole object with the renamed key', function() {
         var template = {
             '*': {
                 'transport': 'delivery'
             }
         };
-        var result = fanci.rename(source.products, template);
-        expect(result).to.be.deep.equal({
+        var result = fanci.rename( source.products, template );
+        expect( result ).to.be.deep.equal( {
             "1234": {
                 "id": 1234,
                 "internal_id": "X04BEEF",
@@ -253,13 +253,25 @@ describe('Rename child key of object', function() {
                     "rate": "business_hour",
                     "time": "weekend"
                 }
+            },
+            "char:1": {
+                "internal_id": "char:1"
+            },
+            "char:2": {
+                "internal_id": "char:2"
+            },
+            "bar:1": {
+                "internal_id": "bar:1"
+            },
+            "foo:1": {
+                "internal_id": "foo:1"
             }
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Rename multiple child keys of object', function() {
-    it('should return the whole object with the renamed keys', function() {
+describe( 'Rename multiple child keys of object', function() {
+    it( 'should return the whole object with the renamed keys', function() {
         var template = {
             '*': {
                 'identifier': 'id',
@@ -267,8 +279,8 @@ describe('Rename multiple child keys of object', function() {
                 'quo': [ 'status', { 'vadis': 'available' } ]
             }
         };
-        var result = fanci.rename(source.products, template);
-        expect(result).to.be.deep.equal({
+        var result = fanci.rename( source.products, template );
+        expect( result ).to.be.deep.equal( {
             "1234": {
                 "identifier": 1234,
                 "internal_id": "X04BEEF",
@@ -307,20 +319,32 @@ describe('Rename multiple child keys of object', function() {
                     "rate": "business_hour",
                     "time": "weekend"
                 }
+            },
+            "char:1": {
+                "internal_id": "char:1"
+            },
+            "char:2": {
+                "internal_id": "char:2"
+            },
+            "bar:1": {
+                "internal_id": "bar:1"
+            },
+            "foo:1": {
+                "internal_id": "foo:1"
             }
-        });
-    });
-});
+        } );
+    } );
+} );
 
-describe('Rename multiple child keys of object in array', function() {
-    it('should return the whole array with objects with renamed keys', function() {
+describe( 'Rename multiple child keys of object in array', function() {
+    it( 'should return the whole array with objects with renamed keys', function() {
         var template = {
             '*': {
                 'writer': 'author'
             }
         };
-        var result = fanci.rename(source.docs, template);
-        expect(result).to.be.deep.equal([
+        var result = fanci.rename( source.docs, template );
+        expect( result ).to.be.deep.equal( [
             {
                 "writer": "Gandalf",
                 "date": "2014-02-03",
@@ -341,17 +365,17 @@ describe('Rename multiple child keys of object in array', function() {
                 "date": "2014-05-22",
                 "description": "Fanci stuff!"
             }
-        ]);
-    });
-});
+        ] );
+    } );
+} );
 
-describe('Rename multiple child keys of object in array without asterisk', function() {
-    it('should return the whole array with objects with renamed keys', function() {
+describe( 'Rename multiple child keys of object in array without asterisk', function() {
+    it( 'should return the whole array with objects with renamed keys', function() {
         var template = {
             'writer': 'author'
         };
-        var result = fanci.rename(source.docs, template);
-        expect(result).to.be.deep.equal([
+        var result = fanci.rename( source.docs, template );
+        expect( result ).to.be.deep.equal( [
             {
                 "writer": "Gandalf",
                 "date": "2014-02-03",
@@ -372,12 +396,12 @@ describe('Rename multiple child keys of object in array without asterisk', funct
                 "date": "2014-05-22",
                 "description": "Fanci stuff!"
             }
-        ]);
-    });
-});
+        ] );
+    } );
+} );
 
-describe('Rename only subset from array', function() {
-    it('should return the object with only the subset of the array with replaced keys', function() {
+describe( 'Rename only subset from array', function() {
+    it( 'should return the object with only the subset of the array with replaced keys', function() {
         var template = {
             '0': {
                 'writer': 'author'
@@ -386,7 +410,7 @@ describe('Rename only subset from array', function() {
                 'desc': 'description'
             }
         };
-        expect(fanci.rename(source.docs, template)).to.be.deep.equal([
+        expect( fanci.rename( source.docs, template ) ).to.be.deep.equal( [
             {
                 "writer": "Gandalf",
                 "date": "2014-02-03",
@@ -407,6 +431,6 @@ describe('Rename only subset from array', function() {
                 "date": "2014-05-22",
                 "desc": "Fanci stuff!"
             }
-        ]);
-    });
-});
+        ] );
+    } );
+} );
