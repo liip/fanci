@@ -15,7 +15,7 @@ Unfortunately the available solutions did not really solve this problem (e.g.  [
 * `rename()` does not change the original structure of the object, it can rename keys. All not renamed keys remain the same.
 * `transform()` changes the structure of the object, only the defined keys will be in the resulting object
 
-All these methods take a source object as their first parameter and a template as their second. The template defines how the resulting JSON looks like. 
+All these methods take a source object as their first parameter and a template as their second. The template defines how the resulting JSON looks like.
 
 
 ## Usage
