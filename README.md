@@ -354,6 +354,15 @@ The asterisk (`*`) has a special meaning in the template:
     }
     ```
 
+4. In fact you can use * as a wildcard in the "path"
+
+    ```javascript
+    {
+        // returns properties like 'name', 'my_name' or 'name_of_product' of products with ids starting with 4 and ending with 7 (e.g. 4567)
+        'ids': 'products.4*7.*name*' 
+    }
+    ```
+
 
 ## Tests
 

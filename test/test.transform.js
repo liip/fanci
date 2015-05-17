@@ -329,3 +329,61 @@ describe('Return only the internal_id value', function() {
         });
     });
 });
+
+describe('Return products containing 4 in id', function() {
+    it('should return products 1234 and 4567', function() {
+        var template = {
+            'four_products': 'products.*4*.name'
+        };
+        var result = fanci.transform(source, template);
+
+        expect(result).to.be.deep.equal({
+            'four_products': [
+                'The Beef',
+                'El Coffee'
+            ]
+        });
+    });
+});
+
+describe('Return products ending with 4', function() {
+    it('should return product 1234', function() {
+        var template = {
+            'four_products': 'products.*4.name'
+        };
+        var result = fanci.transform(source, template);
+
+        expect(result).to.be.deep.equal({
+            'four_products': 'The Beef'
+        });
+    });
+});
+
+describe('Return products starting with 4', function() {
+    it('should return product 4567', function() {
+        var template = {
+            'four_products': 'products.4*.name'
+        };
+        var result = fanci.transform(source, template);
+
+        expect(result).to.be.deep.equal({
+            'four_products': 'El Coffee'
+        });
+    });
+});
+
+describe('Return ids of products starting with 4 and ending with 7', function() {
+    it('should return ids of product 4567', function() {
+        var template = {
+            'ids': 'products.4*7.*id*'
+        };
+        var result = fanci.transform(source, template);
+
+        expect(result).to.be.deep.equal({
+            'ids': [
+                 4567,
+                 'X08CAFE'
+            ]
+        });
+    });
+});

@@ -3,6 +3,11 @@ All notable changes to this project will be documented in this file.
 This project follows [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
+#### Added
+- Functionality to match a property name using '*' as wildcard (thanks Elin Ahmedow for this contribution!)
+
+### Changed
+- New rules for JSCS based on node preset
 
 ## 0.4.0 - 2014-12-30
 #### Added
