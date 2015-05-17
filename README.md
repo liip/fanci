@@ -15,7 +15,7 @@ Unfortunately the available solutions did not really solve this problem (e.g.  [
 * `rename()` does not change the original structure of the object, it can rename keys. All not renamed keys remain the same.
 * `transform()` changes the structure of the object, only the defined keys will be in the resulting object
 
-All these methods take a source object as their first parameter and a template as their second. The template defines how the resulting JSON looks like. 
+All these methods take a source object as their first parameter and a template as their second. The template defines how the resulting JSON looks like.
 
 
 ## Usage
@@ -264,8 +264,8 @@ var original = {
 };
 
 var template = {
-    'id': 'products.1234.internal_id,
-    'company': 'products.4567.delivery.company,
+    'id': 'products.1234.internal_id',
+    'company': 'products.4567.delivery.company',
     'name': [
         'products.6789.name',
         function(value) {

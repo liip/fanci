@@ -78,6 +78,18 @@ describe('Extract arbitrary keys with *', function() {
                         "rate": "business_hour",
                         "time": "weekend"
                     }
+                },
+                "char:1": {
+                    "internal_id": "char:1"
+                },
+                "char:2": {
+                    "internal_id": "char:2"
+                },
+                "bar:1": {
+                    "internal_id": "bar:1"
+                },
+                "foo:1": {
+                    "internal_id": "foo:1"
                 }
             }
         });
@@ -117,7 +129,11 @@ describe('Extract only a subset of keys', function() {
                     "status": {
                         "available": false
                     }
-                }
+                },
+                "char:1": {},
+                "char:2": {},
+                "bar:1": {},
+                "foo:1": {}
             }
         });
     });
