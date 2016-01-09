@@ -69,7 +69,7 @@ var template = {
         }
     }
 }
-var target = fanci.extract(origial, template);
+var target = fanci.extract(original, template);
 ```
 
 #### Result
