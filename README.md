@@ -2,6 +2,8 @@ fanci
 =====
 
 [![Build Status](https://travis-ci.org/liip/fanci.svg?branch=master)](https://travis-ci.org/liip/fanci)
+[![Dependency Status](https://david-dm.org/liip/fanci.svg)](https://david-dm.org/liip/fanci)
+[![devDependency Status](https://david-dm.org/liip/fanci/dev-status.svg)](https://david-dm.org/liip/fanci#info=devDependencies)
 
 [![NPM](https://nodei.co/npm/fanci.png)](https://nodei.co/npm/fanci/)
 
