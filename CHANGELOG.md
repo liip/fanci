@@ -4,19 +4,24 @@ This project follows [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## 0.6.0 - 2016-01-09
+### Changed
+- Updated all npm dependencies
+- Run tests with node 4.0 as well
+
 ## 0.5.0 - 2015-05-18
-#### Added
+### Added
 - Functionality to match a property name using '*' as wildcard (thanks Elin Ahmedow for this contribution!)
 
 ### Changed
 - New rules for JSCS based on node preset
 
 ## 0.4.0 - 2014-12-30
-#### Added
+### Added
 - Added transform functionality to create arbitrary objects based on a template
 - Added format function to transform, so that transformation are more flexible
 
-#### Changed
+### Changed
 - Refactoring to use the Template Method pattern
 - BC-break: the rename template has a new structure, i.e. the new renamed keys are the keys of the template
 
