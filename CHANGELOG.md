@@ -4,6 +4,10 @@ This project follows [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased][unreleased]
 
+## 0.7.0 - 2017-07-06
+### Changed
+- Updated all npm dev dependencies
+
 ## 0.6.0 - 2016-01-09
 ### Changed
 - Updated all npm dependencies
