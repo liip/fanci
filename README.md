@@ -374,6 +374,15 @@ To run the tests simply use the following command:
 npm test
 ```
 
+## Release
+
+To create a new release follow these steps:
+
+1. Update the version number in `package.json`
+1. Update the `CHANGELOG.md`
+1. Create a [new release/tag on GitHub](https://github.com/liip/fanci/releases)
+1. Publish the release with npm: `npm publish`
+
 [json-path]: https://github.com/flitbit/json-path
 [jsont]: https://github.com/CamShaft/jsont
 [json2json]: https://github.com/joelvh/json2json
